@@ -9,7 +9,7 @@ import android.content.Context
  */
 object Levels {
 
-    const val MAX = 5
+    const val MAX = 10
     const val DAYS_PER_LEVEL = 30
     private const val PREFS = "shield_level"
 
@@ -42,35 +42,39 @@ object Levels {
 
     private val nudity = arrayOf(BUTT_EXP, F_BREAST_EXP, F_GEN_EXP, ANUS_EXP, M_GEN_EXP)
 
+    private fun nud(v: Float) = nudity.map { it to v }.toTypedArray()
+
     val ALL = listOf(
-        Level(
-            1, "רמה 1: בסיס",
-            "חוסם כל עירום (עליון ותחתון), פורנו, חיפושים ואתרים.",
-            t(*nudity.map { it to 0.45f }.toTypedArray()), 1,
-        ),
-        Level(
-            2, "רמה 2: רגיש יותר",
-            "המודל רגיש יותר ותופס עירום גם כשהוא קטן או חלקי.",
-            t(*nudity.map { it to 0.35f }.toTypedArray()), 1,
-        ),
-        Level(
-            3, "רמה 3: גם בגדי ים והלבשה תחתונה",
-            "חוסם גם תמונות בבגד ים או בהלבשה תחתונה, וגם חיפושים כאלה.",
-            t(*nudity.map { it to 0.35f }.toTypedArray(),
-                F_BREAST_COV to 0.50f, BUTT_COV to 0.50f, F_GEN_COV to 0.50f), 2,
-        ),
-        Level(
-            4, "רמה 4: לבוש חושפני",
-            "גם בטן חשופה ולבוש חושפני מאוד.",
-            t(*nudity.map { it to 0.32f }.toTypedArray(),
-                F_BREAST_COV to 0.42f, BUTT_COV to 0.42f, F_GEN_COV to 0.42f, BELLY_EXP to 0.50f), 2,
-        ),
-        Level(
-            5, "רמה 5: מקסימום",
-            "הרגישות הגבוהה ביותר בכל הקטגוריות.",
-            t(*nudity.map { it to 0.28f }.toTypedArray(),
-                F_BREAST_COV to 0.35f, BUTT_COV to 0.35f, F_GEN_COV to 0.35f, BELLY_EXP to 0.40f), 2,
-        ),
+        Level(1, "👣 צעד ראשון",
+            "הבסיס, חובה: חוסם כל עירום (עליון ותחתון), פורנו, חיפושים ואתרים.",
+            t(*nud(0.45f)), 1),
+        Level(2, "👀 עיניים פקוחות",
+            "המודל קצת יותר רגיש ותופס עירום גם כשהוא קטן או בפינה.",
+            t(*nud(0.40f)), 1),
+        Level(3, "🚪 שומר הסף",
+            "רגישות גבוהה יותר. גם עירום חלקי או מטושטש נחסם.",
+            t(*nud(0.35f)), 1),
+        Level(4, "🏖️ לא הולך לים",
+            "מתחילים עם בגדי ים והלבשה תחתונה, רק במקרים הבולטים.",
+            t(*nud(0.35f), F_BREAST_COV to 0.60f, BUTT_COV to 0.60f, F_GEN_COV to 0.60f), 1),
+        Level(5, "🔍 מגן החיפושים",
+            "גם חיפושים של בגדי ים, הלבשה תחתונה ולבוש חושפני נחסמים.",
+            t(*nud(0.35f), F_BREAST_COV to 0.55f, BUTT_COV to 0.55f, F_GEN_COV to 0.55f), 2),
+        Level(6, "🧱 חומת ברזל",
+            "בגדי ים והלבשה תחתונה נחסמים כמעט תמיד.",
+            t(*nud(0.32f), F_BREAST_COV to 0.45f, BUTT_COV to 0.45f, F_GEN_COV to 0.45f), 2),
+        Level(7, "🦅 נשר",
+            "גם בטן חשופה ולבוש חושפני בולט.",
+            t(*nud(0.32f), F_BREAST_COV to 0.42f, BUTT_COV to 0.42f, F_GEN_COV to 0.42f, BELLY_EXP to 0.55f), 2),
+        Level(8, "💎 לב טהור",
+            "לבוש חושפני נתפס גם כשהוא פחות בולט.",
+            t(*nud(0.30f), F_BREAST_COV to 0.38f, BUTT_COV to 0.38f, F_GEN_COV to 0.38f, BELLY_EXP to 0.45f), 2),
+        Level(9, "🦁 אריה",
+            "רגישות גבוהה מאוד בכל הקטגוריות.",
+            t(*nud(0.28f), F_BREAST_COV to 0.35f, BUTT_COV to 0.35f, F_GEN_COV to 0.35f, BELLY_EXP to 0.40f), 2),
+        Level(10, "👑 מלך",
+            "המקסימום. אתה שולט במסך, לא הוא בך.",
+            t(*nud(0.25f), F_BREAST_COV to 0.32f, BUTT_COV to 0.32f, F_GEN_COV to 0.32f, BELLY_EXP to 0.35f), 2),
     )
 
     private fun prefs(c: Context) = c.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)

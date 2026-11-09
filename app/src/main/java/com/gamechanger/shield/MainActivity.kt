@@ -209,21 +209,38 @@ class MainActivity : Activity() {
         val days = Levels.daysAtLevel(this)
         val offer = Levels.shouldOfferUpgrade(this)
         card(if (offer) GOOD else null) {
-            heading("📈 ${cur.name}")
+            heading("רמה ${cur.number}/${Levels.MAX}: ${cur.name}")
             body(cur.description)
             if (cur.number < Levels.MAX) {
                 val left = (Levels.DAYS_PER_LEVEL - days).coerceAtLeast(0)
                 body(if (offer) "עברו $days ימים ברמה הזאת. כל הכבוד! 🎉" else "יום $days ברמה הזאת. עוד $left ימים עד ההצעה לעלות רמה.")
             } else {
-                body("אתה ברמה הגבוהה ביותר. כל הכבוד! 👑")
+                body("הגעת לפסגה. כל הכבוד! 👑")
             }
+
+            // The ladder: done / current / ahead
+            target().addView(TextView(this@MainActivity).apply {
+                text = Levels.ALL.joinToString("\n") { l ->
+                    when {
+                        l.number < cur.number -> "✅  ${l.number}. ${l.name}"
+                        l.number == cur.number -> "▶️  ${l.number}. ${l.name}  ← אתה כאן"
+                        else -> "🔒  ${l.number}. ${l.name}"
+                    }
+                }
+                setTextColor(TEXT)
+                textSize = 15f
+                setLineSpacing(0f, 1.35f)
+                setPadding(0, dp(8), 0, dp(8))
+            })
+
             if (cur.number < Levels.MAX) {
                 val next = Levels.ALL[cur.number]
                 if (offer) {
-                    body("מוכן לעלות? ${next.name}\n${next.description}")
+                    body("מוכן לשלב הבא? ${next.name}\n${next.description}")
                     button("עולה רמה 💪", GOOD) { Levels.set(this, next.number, lock); toast("עלית ל${next.name}"); render() }
                     button("עוד שבוע", CARD) { Levels.snoozeOffer(this); render() }
                 } else {
+                    body("הבא בתור: ${next.name}\n${next.description}")
                     button("לעלות עכשיו ל${next.name}", CARD) {
                         Levels.set(this, next.number, lock); toast("עלית רמה 💪"); render()
                     }
