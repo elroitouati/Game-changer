@@ -9,3 +9,4 @@ app/src/main/assets/nudenet_320n.onnx
 keystore/
 *.jks
 *.keystore
+.kotlin/
