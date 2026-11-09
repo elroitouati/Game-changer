@@ -1,0 +1,11 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+# The NSFW model is downloaded at build time (scripts/fetch-model.sh)
+app/src/main/assets/nudenet_320n.onnx
+keystore/
+*.jks
+*.keystore

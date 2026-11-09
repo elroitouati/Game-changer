@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Game Changer</string>
+    <string name="accessibility_description">Game Changer רואה את מה שמוצג על המסך ומה שמוקלד, ומזהה תוכן לא צנוע בתוך הטלפון בלבד. שום דבר לא נשמר ושום דבר לא נשלח לאינטרנט. כשמזוהה תוכן כזה, המסך נחסם והאפליקציה נסגרת.</string>
+</resources>
