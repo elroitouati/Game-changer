@@ -407,11 +407,11 @@ class ShieldAccessibilityService : AccessibilityService() {
         if (overlay != null) return
         val wm = getSystemService(WindowManager::class.java)
         val v = FrameLayout(this).apply {
-            setBackgroundColor(Color.BLACK)
+            setBackgroundColor(0xFF0D1013.toInt())
             addView(TextView(context).apply {
-                text = "נחסם 🛡️\nאתה חזק יותר מזה."
-                setTextColor(Color.argb(120, 255, 255, 255))
-                textSize = 18f
+                text = "התוכן נחסם"
+                setTextColor(Color.argb(110, 238, 241, 243))
+                textSize = 16f
                 gravity = Gravity.CENTER
             }, FrameLayout.LayoutParams(-1, -1))
         }
